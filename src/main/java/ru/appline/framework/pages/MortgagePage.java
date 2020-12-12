@@ -118,7 +118,7 @@ public class MortgagePage extends BasePage {
      * Метод заполнения чекбоксов
      *
      * @param nameField - имя веб элемента, поля ввода
-     * @param value     - значение вводимое в поле 'Y' или 'N'
+     * @param value     - значение вводимое в поле "true" или "false"
      * @return MortgagePage - т.е. остаемся на этой странице
      */
     @Step("Заполняем поле '{nameField}' значение '{value}'")
@@ -162,7 +162,7 @@ public class MortgagePage extends BasePage {
      * Метод проверки результирующих значений
      *
      * @param nameElement - имя веб элемента, поля ввода
-     * @param value     - значение вводимое в поле 'Y' или 'N'
+     * @param value     - значение актуальное
      * @return MortgagePage - т.е. остаемся на этой странице
      */
     @Step("Сравниваем элемент '{nameElement}' значение '{value}'")

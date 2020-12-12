@@ -4,7 +4,6 @@ import io.qameta.allure.Attachment;
 import io.qameta.allure.junit5.AllureJunit5;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import ru.appline.framework.managers.DriverManager;
 
 import static ru.appline.framework.managers.DriverManager.*;
 
