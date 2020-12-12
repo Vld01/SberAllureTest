@@ -1,6 +1,7 @@
 package ru.appline.framework.pages;
 
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -11,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.appline.framework.managers.PageManager;
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.appline.framework.managers.DriverManager.getDriver;
 
 /**
@@ -105,8 +107,43 @@ public class BasePage {
      */
     public void fillInputField(WebElement field, int value) {
         scrollToElementJs(field);
-        elementToBeClickable(field).click();
+        while (!field.getAttribute("value").isEmpty()) {
+            field.sendKeys(Keys.BACK_SPACE);
+        }
         field.sendKeys("" + value);
+    }
+
+    /**
+     * Общий метод по заполнению чекбоксов
+     *
+     * @param field - веб-елемент поле ввода
+     * @param value - значение вводимое в поле
+     */
+    public void fillInputCheckbox(WebElement field, String value) {
+        if (!field.getAttribute("aria-checked").equals(value)) field.click();
+    }
+
+    /**
+     * Общий метод проверки соответствия полей
+     *
+     * @param element - веб-елемент поле ввода
+     * @param value - значение вводимое в поле
+     * @param nameElement - имя элемента вводимого в поле
+     */
+    public void checkValueElement(WebElement element, String value, String nameElement){
+        scrollToElementJs(element);
+        int expectedValue = Integer.parseInt(value.replaceAll("[^0-9]",""));
+        int actualValue = Integer.parseInt(element.getText().replaceAll("[^0-9]",""));
+
+        if (expectedValue != actualValue) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            actualValue = Integer.parseInt(element.getText().replaceAll("[^0-9]",""));
+        }
+        assertEquals(expectedValue, actualValue, "В поле '" + nameElement + "' значения не соответствует ожидаемому");
     }
 
     /**

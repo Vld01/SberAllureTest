@@ -6,7 +6,9 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import ru.appline.framework.managers.DriverManager;
 
-public class MyAllureListener extends AllureJunit5 {
+import static ru.appline.framework.managers.DriverManager.*;
+
+public class MyAllureListener extends AllureJunit5{
 
 
 //  Здесь должен быть переопределённые методы или метод который позволит прикреплять скриншоты к шагу аллюра
@@ -15,9 +17,8 @@ public class MyAllureListener extends AllureJunit5 {
 //  Или там же прописать Allure.getLifecycle().addAttachment();
 
 
-
     @Attachment(value = "screenshot", type = "image/png")
     public static byte[] addScreenshot() {
-        return ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.BYTES);
+        return ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.BYTES);
     }
 }
