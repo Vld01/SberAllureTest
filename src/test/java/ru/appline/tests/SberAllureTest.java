@@ -1,14 +1,13 @@
 package ru.appline.tests;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import ru.appline.base.BaseTests;
-import ru.appline.framework.utils.MyTestWatcher;
+import ru.appline.framework.utils.MyAllureListener;
 
 public class SberAllureTest extends BaseTests {
 
     @Test
-    @ExtendWith(MyTestWatcher.class)
     public void mortgageInSberTest(){
         app.getStartPage()
                 .choiceMortgageCompleteHouse()

@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 
 public class StartPage extends BasePage {
@@ -28,7 +28,7 @@ public class StartPage extends BasePage {
     @Step("Выбираем подменю с ипотекой")
     public MortgagePage choiceMortgageCompleteHouse(){
         elementToBeClickable(mortgageElement).click();
-        assertFalse(mortgageCheckSumMenuElement.isEmpty(), "Подменю не отобразилось");
+        assertFalse("Подменю не отобразилось", mortgageCheckSumMenuElement.isEmpty());
         elementToBeClickable(mortgageCompleteHouseElement).click();
         return app.getMortgagePage();
     }

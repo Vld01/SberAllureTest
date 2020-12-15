@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.appline.framework.managers.PageManager;
 
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.*;
 import static ru.appline.framework.managers.DriverManager.getDriver;
 
 /**
@@ -114,13 +114,29 @@ public class BasePage {
     }
 
     /**
+     * Общий метод явного ожидания
+     *
+     * @param millis - время ожидания в милисекундах
+     */
+    public void explicitWait(int millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Общий метод по заполнению чекбоксов
      *
      * @param field - веб-елемент поле ввода
      * @param value - значение вводимое в поле
      */
     public void fillInputCheckbox(WebElement field, String value) {
-        if (!field.getAttribute("aria-checked").equals(value)) field.click();
+        if (!field.getAttribute("aria-checked").equals(value)) {
+            explicitWait(200);
+            field.click();
+        }
     }
 
     /**
@@ -136,14 +152,10 @@ public class BasePage {
         int actualValue = Integer.parseInt(element.getText().replaceAll("[^0-9]",""));
 
         if (expectedValue != actualValue) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            explicitWait(1000);
             actualValue = Integer.parseInt(element.getText().replaceAll("[^0-9]",""));
         }
-        assertEquals(expectedValue, actualValue, "В поле '" + nameElement + "' значения не соответствует ожидаемому");
+        assertEquals("В поле '" + nameElement + "' значения не соответствует ожидаемому", expectedValue, actualValue);
     }
 
     /**
